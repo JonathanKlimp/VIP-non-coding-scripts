@@ -14,5 +14,6 @@ module load RPlus
 
 for file in /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh37/ncER/*; do \
 	plot_name=basename $file .bed; 
-	Rscript --vanilla create_plot.R $file $plot_name; \
+	plot_title=plotname".png"
+	Rscript --vanilla create_plot.R -f $file -o $plot_title -t $plot_name; \
 done 
