@@ -16,6 +16,11 @@ option_list <- list(
 opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
+if (is.null(opt$file)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (input file).bed", call.=FALSE)
+}
+
 input_file <- opt$file
 plot_name <- opt$title
 file_name <- opt$output
@@ -49,5 +54,5 @@ scores_df %>%
                       breaks=c('low', 'medium', 'high', "very high"),
                       labels=c("low", "medium", "high", "very high"))
 
-ggsave(file_name)
+ggsave(file_name, device="png")
 
