@@ -1,0 +1,81 @@
+---
+title: "Plots greenDB and VIP ncVarDB"
+output: html_document
+date: "2023-01-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Aantallen GREEN-DB en VIP met de controle set ncVarDB
+#Totaal GREEN-DB:
+#
+#	- benign: 7204
+#		- unannotated: 2856
+#		- level 0: 1545
+#		- level 1: 1971
+#		- level 2: 757
+#		- level 3: 72
+#		- level 4: 3
+#		
+#	- pathogenic: 656
+#		- unannotated: 176
+#		- level 0: 1
+#		- level 1: 10
+#		- level 2: 108
+#		- level 3: 253
+#		- level 4: 108		
+#
+#Totaal VIP:
+#	
+#	- benign: 7052
+#		- level 0: 6857
+#		- level 1: 116
+#		- level 2: 31
+#		- level 3: 40
+#		- level 4: 7
+#	
+#	- pathogenic: 647
+#		- level 0: 13
+#		- level 1: 233
+#		- level 2: 1
+#		- level 3: 284
+#		- level 4: 115		 
+
+# each value + 1 to prevent log error with zero
+annotation <- c("unannotated","0", "1", "2", "3", "4")
+variant_count_benign_greenDB <- c(2856, 1545, 1971, 757, 73, 3) # benign GREEN-DB
+variant_count_benign_VIP <- c(0, 6857, 116, 31, 40, 7)
+variant_count_pathogenic_greenDB <- c(176, 1, 10, 108, 253, 108)
+variant_count_pathogenic_VIP <- c(0, 13, 233, 1, 284, 115)
+
+variant_counts_df <- data.frame(annotation, variant_count_benign_greenDB, variant_count_benign_VIP, variant_count_pathogenic_greenDB, variant_count_pathogenic_VIP)
+
+test_df <- melt(variant_counts_df)
+
+ggplot(test_df, aes(x = annotation, y= value, fill = variable), ylab="Count") +
+  geom_bar(stat="identity", width=.5, position = "dodge")  +
+  scale_y_log10(breaks=c(0,10,25,75,150,250,8000)) +
+  labs(title="Number of scored variants per score level", y = "Count", x = "Score")
+
+variant_counts_df_benign <- data.frame(annotation, variant_count_benign_greenDB, variant_count_benign_VIP)
+
+variant_counts_df_pathogenic <- data.frame(annotation, variant_count_pathogenic_greenDB, variant_count_pathogenic_VIP)
+
+df_benign_variants <- melt(variant_counts_df_benign)
+  
+df_pathogenic_variants <- melt(variant_counts_df_pathogenic)
+
+ggplot(df_benign_variants, aes(x = annotation, y= value, fill = variable), ylab="Count") +
+  geom_bar(stat="identity", width=.5, position = "dodge")  +
+  scale_y_log10(breaks=c(0,10,25,75,150,250,8000)) +
+  labs(title="Number of scored benign variants per score level", y = "Count", x = "Score")
+
+ggplot(df_pathogenic_variants, aes(x = annotation, y= value, fill = variable), ylab="Count") +
+  geom_bar(stat="identity", width=.5, position = "dodge")  +
+  scale_y_log10(breaks=c(0,10,25,75,150,200,300)) +
+  labs(title="Number of scored pathogenic variants per score level", y = "Count", x = "Score")
+
+```
