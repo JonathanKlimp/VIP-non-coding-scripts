@@ -55,10 +55,10 @@ variant_counts_df <- data.frame(annotation, variant_count_benign_greenDB, varian
 
 test_df <- melt(variant_counts_df)
 
-ggplot(test_df, aes(x = annotation, y= value, fill = variable), ylab="Count") +
-  geom_bar(stat="identity", width=.5, position = "dodge")  +
-  scale_y_log10(breaks=c(0,10,25,75,150,250,8000)) +
-  labs(title="Number of scored variants per score level", y = "Count", x = "Score")
+#ggplot(test_df, aes(x = annotation, y= value, fill = variable), ylab="Count") +
+#  geom_bar(stat="identity", width=.5, position = "dodge")  +
+#  scale_y_log10(breaks=c(0,10,25,75,150,250,7000)) +
+#  labs(title="Number of scored variants per score level", y = "Count", x = "Score")
 
 variant_counts_df_benign <- data.frame(annotation, variant_count_benign_greenDB, variant_count_benign_VIP)
 
@@ -70,12 +70,14 @@ df_pathogenic_variants <- melt(variant_counts_df_pathogenic)
 
 ggplot(df_benign_variants, aes(x = annotation, y= value, fill = variable), ylab="Count") +
   geom_bar(stat="identity", width=.5, position = "dodge")  +
-  scale_y_log10(breaks=c(0,10,25,75,150,250,8000)) +
+  scale_y_log10(breaks=c(0,10,25,75,150,250,7000)) +
+  geom_text(aes(label=value), position = position_dodge(width = 0.5), vjust = -0.25) +
   labs(title="Number of scored benign variants per score level", y = "Count", x = "Score")
 
 ggplot(df_pathogenic_variants, aes(x = annotation, y= value, fill = variable), ylab="Count") +
   geom_bar(stat="identity", width=.5, position = "dodge")  +
-  scale_y_log10(breaks=c(0,10,25,75,150,200,300)) +
+  scale_y_sqrt(breaks=c(0,10,25,75,125,250,300)) +
+  geom_text(aes(label=value), position = position_dodge(width = 0.5), vjust = -0.25) +
   labs(title="Number of scored pathogenic variants per score level", y = "Count", x = "Score")
 
 ```

@@ -47,9 +47,10 @@ colnames(df) <- c("score", "pathogenic", "benign")
 score_df <- melt(df)
 names(score_df)[names(score_df) == 'variable'] <- "Variant"
 
-ggplot(score_df, aes(x = score, y= value, fill = Variant), ylab="Count") +
+ggplot(score_df, aes(x = score, y= value, fill = variable), ylab="Count") +
   geom_bar(stat="identity", width=.5, position = "dodge")  +
-  scale_y_log10(breaks=c(0,25,75,150,250,8000)) +
+  scale_y_log10(breaks=c(0,25,75,150,250,7000)) +
+  geom_text(aes(label=value), position = position_dodge(width = 0.5), vjust = -0.25) +
   labs(title="Number of scored variants per score level", y = "Count", x = "Score")
 
 ggsave("Variant_count_per_score.png", device = "png")
