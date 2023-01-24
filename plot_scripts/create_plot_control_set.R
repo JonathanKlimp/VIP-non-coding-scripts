@@ -7,7 +7,9 @@ option_list <- list(
   make_option(c("-b", "--benign"), type="character", default=NULL, 
               help="input file with the benign variants", metavar="character"),
   make_option(c("-p", "--pathogenic"), type="character", default=NULL,
-              help="input file with the pathogenc variants", metavar="character")
+              help="input file with the pathogenc variants", metavar="character"),
+  make_option(c("-t", "--title"), type="string", default="Number of scored variants per score level",
+              help="title of the plot", metavar="character")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -20,6 +22,7 @@ if (is.null(opt$benign) || is.null(opt$pathogenic)){
 
 input_benign <- opt$benign
 input_pathogenic <- opt$pathogenic
+title <- opt$title
 
 ncVarDB_benign <- read.table(input_benign)
 ncVarDB_patho <-read.table(input_pathogenic)
@@ -47,10 +50,11 @@ colnames(df) <- c("score", "pathogenic", "benign")
 score_df <- melt(df)
 names(score_df)[names(score_df) == 'variable'] <- "Variant"
 
-ggplot(score_df, aes(x = score, y= value, fill = variable), ylab="Count") +
+ggplot(score_df, aes(x = score, y= value, fill = Variant), ylab="Count") +
   geom_bar(stat="identity", width=.5, position = "dodge")  +
   scale_y_log10(breaks=c(0,25,75,150,250,7000)) +
   geom_text(aes(label=value), position = position_dodge(width = 0.5), vjust = -0.25) +
-  labs(title="Number of scored variants per score level", y = "Count", x = "Score")
+  labs(title=title, y = "Count", x = "Score")
 
-ggsave("Variant_count_per_score.png", device = "png")
+filename <- paste(title, ".png")
+ggsave(filename, device = "png")
