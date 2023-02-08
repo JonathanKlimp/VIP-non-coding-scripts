@@ -21,8 +21,8 @@ for file in /groups/solve-rd/tmp10/annotation/SrWgsNovelOmics/*; do \
 	file_name=$(basename ${file_name_full})
 
 	echo "file_namevcf: "$file_name_vcf
-	echo "file_name_with_dir "$file_name
-	echo "file_name "$test_name
+	echo "file_name_with_dir "$file_name_with_dir
+	echo "file_name "$file_name
 	echo "file name merged etc "$file_name".merged.annotations.filtered.hcdiff"
 	echo "------"
 	
