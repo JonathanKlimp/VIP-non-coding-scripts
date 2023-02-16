@@ -20,12 +20,13 @@ do
 	esac
 done
 
-
+# grab position back and the same position for indels
 awk '{
   if ($11 ~/[ATCG]+/)
 	print $7"\t"$8;
   else 
-  	print $7"\t"($8 - 1)
+  	print $7"\t"($8 - 1) 
+  	print $7"\t"($8)
 }' "$hcdiff_file" > "$output_location""/""$file_name""_positions.txt"
 
 echo $hcdiff_file
