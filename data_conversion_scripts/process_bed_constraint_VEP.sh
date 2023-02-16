@@ -21,8 +21,10 @@ do
 	esac
 done
 
-cut -f 1,2,3,9 "$input_file" > tmp.txt && mv tmp.txt "$output_file"         
+cut -f 1,2,3,9 "$input_file" > tmp.txt 
 
-grep -v "#" "$output_file"   | sort -k1,1 -k2,2n -k3,3n -t$'\t' | bgzip -c > "$output_file".gz
+awk '$4 >= 0.7 && $4 != "NA"' tmp.txt > && mv tmp.txt "$output_file" 
+
+grep -v "#" "$output_file" | sort -k1,1 -k2,2n -k3,3n -t$'\t' | bgzip -c > "$output_file".gz
 
 tabix -p bed "$output_file".gz
