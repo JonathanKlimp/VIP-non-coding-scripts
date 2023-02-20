@@ -1,4 +1,4 @@
-# Graduation-scripts
+# VIP non-coding scripts
 
 This repository contains all the scripts that have been made during the graduation project of implementing non-coding functionality into [VIP](https://github.com/molgenis/vip) 
 
