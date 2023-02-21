@@ -1,6 +1,6 @@
 # VIP non-coding scripts
 
-This repository contains all the scripts that have been made during the graduation project of implementing non-coding functionality into [VIP](https://github.com/molgenis/vip/tree/feat/non-coding) 
+This repository contains all the most essential scripts that have been made and used during the project of implementing non-coding functionality into [VIP](https://github.com/molgenis/vip/tree/feat/non-coding) 
 
 
 The scripts are split up into different directories
