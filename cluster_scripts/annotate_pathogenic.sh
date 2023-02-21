@@ -13,5 +13,5 @@
 #SBATCH --get-user-env=L
 
 apptainer exec --bind annotate:/mnt /groups/solve-rd/tmp10/projects/vip/images/vcf-report-5.1.2.sif \
-   java -jar /mnt/annotate_VIP_varan_score.jar -i /mnt/ncVar_pathogenic_lifted_over_to_GRCh37.vcf.gz \
-   -c /mnt/decision_tree_GRCh37.json -o out.vcf -d -f
+   java -jar /mnt/vcf-decision-tree.jar -i /mnt/ncVar_pathogenic_lifted_over_to_GRCh37.vcf.gz \
+   -o ncVar_pathogenic_lifted_over_to_GRCh37_score_annotated.vcf -d -f
