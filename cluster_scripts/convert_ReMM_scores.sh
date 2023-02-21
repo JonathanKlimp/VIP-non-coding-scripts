@@ -23,5 +23,3 @@ tabix -p bed /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh3
 
 rm /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh37/tmpReMM.bed
 rm /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh37/GRCh37_ReMM.tsv
-#mv /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh38/GRCh38_ReMM_new_column.bed.gz /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh38/GRCh38_ReMM.bed.gz
-#mv /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh38/GRCh38_ReMM_new_column.bed.gz.tbi /groups/solve-rd/tmp10/projects/vip/feat/non-coding/resources/GRCh38/GRCh38_ReMM.bed.gz.tbi
